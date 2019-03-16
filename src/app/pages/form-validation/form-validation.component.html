@@ -1,0 +1,28 @@
+<form [formGroup]="validationForm" (ngSubmit)="submit()">
+    <div class="container">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" 
+                placeholder="Enter First Name"
+                formControlName="firstName"/>
+            <div class="alert alert-info" *ngIf="validationForm.controls.firstName.invalid && ( validationForm.controls.firstName.dirty || validationForm.controls.firstName.touched )">
+                    <div *ngIf="validationForm.controls.firstName.errors.required">
+                            Name is required.
+                          </div>
+                          <div *ngIf="validationForm.controls.firstName.errors.minlength">
+                            Name must be at least 3 characters long.
+                          </div>
+                          <div *ngIf="validationForm.controls.firstName.errors.maxlength">
+                                Max 35 characters are allowed
+                          </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="lastName"
+                formControlName="lastName"/>
+                <div class="alert alert-info" *ngIf="!validationForm.controls.lastName.valid && validationForm.controls.lastName.touched">Last Name is Required</div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!validationForm.valid">Submit</button>
+    </div>
+</form>
